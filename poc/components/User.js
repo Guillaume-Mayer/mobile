@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {View, Image, Text} from 'react-native';
 
 export default class User extends Component {
 
   render() {
     return (
-        <Text>{this.props.name}</Text>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Image style={{width: 30, height: 30}} source={require('../resources/images/Guillaume.png')}></Image>
+          <Text style={{fontSize: 20}}>{this.props.name}</Text>
+        </View>
     );
   }
 
