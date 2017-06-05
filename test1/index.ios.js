@@ -13,6 +13,23 @@ import {
   Image
 } from 'react-native';
 
+class Blink extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showText: true};
+    setInterval(() => {
+      this.setState({showText: !this.state.showText});
+    }, 1000);
+  }
+
+  render() {
+    let display = this.state.showText ? this.props.text : ' ';
+    return (
+      <Text>{display}</Text>
+    );
+  }
+}
+
 class Hello extends Component {
   render() {
     return <Text style={this.props.style}>Hello {this.props.name}</Text>
@@ -30,6 +47,7 @@ export default class test1 extends Component {
           Bienvenido to React Native!
         </Text>
         <Hello name='Guillaume' style={styles.welcome}></Hello>
+        <Blink text='Oedipe Pierre'></Blink>
         <Hello name='Mayer' style={styles.instructions}></Hello>
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
