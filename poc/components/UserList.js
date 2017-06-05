@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View, ListView, Text} from 'react-native';
 
+import User from './User';
+
 export default class UserList extends Component {
 
   constructor(props) {
@@ -18,7 +20,7 @@ export default class UserList extends Component {
         <View style={{flex: 1}}>
           <ListView
             dataSource={this.state.users}
-            renderRow={(rowData) => <Text>{rowData}</Text>}
+            renderRow={(rowData) => <User name={rowData}/>}
           />
         </View>
     );
