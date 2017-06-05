@@ -9,23 +9,64 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
+import MapView from 'react-native-maps';
+
+class Blink extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showText: true};
+    setInterval(() => {
+      this.setState({showText: !this.state.showText});
+    }, 1000);
+  }
+
+  render() {
+    let display = this.state.showText ? this.props.text : ' ';
+    return (
+      <Text>{display}</Text>
+    );
+  }
+}
+
+class Hello extends Component {
+  render() {
+    return <Text style={this.props.style}>Hello {this.props.name}</Text>
+  }
+}
 
 export default class test1 extends Component {
   render() {
+    let pic = {
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+    };
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Bienvenido to React Native!
+        </Text>
+        <Hello name='Guillaume' style={styles.welcome}></Hello>
+        <Blink text='Oedipe Pierre'></Blink>
+        <Hello name='Mayer' style={styles.instructions}></Hello>
+        <Text style={styles.instructions}>
+          To get started, edit index.ios.js
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.android.js
+          Press Cmd+R to reload,{'\n'}
+          Cmd+D or shake for dev menu
         </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <Image source={pic} style={{width: 193, height: 110}}/>
+        <MapView
+          style={{width: 193, height: 110}}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />        
       </View>
     );
   }

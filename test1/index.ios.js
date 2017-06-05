@@ -12,6 +12,7 @@ import {
   View,
   Image
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 class Blink extends Component {
   constructor(props) {
@@ -57,6 +58,15 @@ export default class test1 extends Component {
           Cmd+D or shake for dev menu
         </Text>
         <Image source={pic} style={{width: 193, height: 110}}/>
+        <MapView
+          style={{width: 193, height: 110}}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />        
       </View>
     );
   }
