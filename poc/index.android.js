@@ -1,53 +1,48 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
+  DrawerLayoutAndroid,
+  View,
   Text,
-  View
 } from 'react-native';
 
+import UserList from './components/UserList';
+import Map from './components/Map';
+
 export default class poc extends Component {
+  state = {
+    selectedMenu: 'users'
+  };
   render() {
+    const navigationView = () => {
+      return (
+        <View style={{flex: 1, backgroundColor: '#fff'}}>
+          <Text 
+            style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'users' ? 'red' : 'gray'}}
+            onPress={() => {
+              this.setState({selectedMenu: 'users'});
+            }}>
+            Usuarios
+          </Text>
+          <Text 
+            style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'map' ? 'red' : 'gray'}}
+            onPress={() => {
+              this.setState({selectedMenu: 'map'});
+            }}>
+            Mapa
+          </Text>
+        </View>
+      );
+    };
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <DrawerLayoutAndroid
+        drawerWidth={300}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={() => navigationView()}>
+        {this.state.selectedMenu === 'users' ? <UserList/> : <Map/>}
+      </DrawerLayoutAndroid>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('poc', () => poc);

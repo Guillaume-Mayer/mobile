@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   View,
   TabBarIOS,
 } from 'react-native';
+
 import UserList from './components/UserList';
 import Map from './components/Map';
 
@@ -38,11 +38,5 @@ export default class poc extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 AppRegistry.registerComponent('poc', () => poc);
