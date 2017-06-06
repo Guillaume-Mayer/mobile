@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
-//import MapView from 'react-native-maps';
+import {View} from 'react-native';
+import MapView from 'react-native-maps';
 
 export default class Map extends Component {
 
   render() {
     return (
-        <Text>Mapa</Text>
+      <View style={{flex: 1}}>
+        <MapView
+          style={{flex: 1}}
+          initialRegion={{
+            latitude: -33.4489,
+            longitude: -70.6693,
+            latitudeDelta: 1,
+            longitudeDelta: 1,
+          }}
+        />
+        </View>     
     );
   }
 
