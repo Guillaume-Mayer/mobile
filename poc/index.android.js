@@ -10,9 +10,19 @@ import UserList from './components/UserList';
 import Map from './components/Map';
 
 export default class poc extends Component {
+  constructor(props) {
+    super(props);
+    this.showMenu = this.showMenu.bind(this);
+  }
+
   state = {
     selectedMenu: 'users'
   };
+
+  showMenu = () => {
+    this.menu.openDrawer();
+  }
+
   render() {
     const navigationView = () => {
       return (
@@ -21,6 +31,7 @@ export default class poc extends Component {
             style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'users' ? 'red' : 'gray'}}
             onPress={() => {
               this.setState({selectedMenu: 'users'});
+              this.menu.closeDrawer();
             }}>
             Usuarios
           </Text>
@@ -28,6 +39,7 @@ export default class poc extends Component {
             style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'map' ? 'red' : 'gray'}}
             onPress={() => {
               this.setState({selectedMenu: 'map'});
+              this.menu.closeDrawer();
             }}>
             Mapa
           </Text>
@@ -36,10 +48,11 @@ export default class poc extends Component {
     };
     return (
       <DrawerLayoutAndroid
+        ref={(menu) => { this.menu = menu; }}
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() => navigationView()}>
-        {this.state.selectedMenu === 'users' ? <UserList/> : <Map/>}
+        {this.state.selectedMenu === 'users' ? <UserList/> : <Map onButtonPress={this.showMenu}/>}
       </DrawerLayoutAndroid>
     );
   }

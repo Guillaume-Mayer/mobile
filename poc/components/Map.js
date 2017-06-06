@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {Platform, View, Button, StyleSheet} from 'react-native';
 import MapView from 'react-native-maps';
 
 export default class Map extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}> 
         <MapView
-          style={{flex: 1}}
+          style={styles.map}
           initialRegion={{
             latitude: -33.4489,
             longitude: -70.6693,
@@ -16,8 +16,24 @@ export default class Map extends Component {
             longitudeDelta: 1,
           }}
         />
-        </View>     
+        {Platform.OS === 'android' ?
+        <Button
+          title='Menu'
+          color='green'
+          onPress={this.props.onButtonPress}/> : null
+        }
+      </View>     
     );
   }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'flex-start',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
