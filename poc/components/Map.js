@@ -49,6 +49,10 @@ export default class Map extends Component {
     }
   }
 
+  onRegionChangeComplete(region)  {
+    console.log("NEW REGION: " + region.latitude + ";" + region.longitude);
+  };
+
   render() {
     return (
       <View style={styles.container}> 
@@ -60,6 +64,7 @@ export default class Map extends Component {
             latitudeDelta: 1,
             longitudeDelta: 1,
           }}
+          onRegionChangeComplete={this.onRegionChangeComplete}
         >
         {this.state.markers.map(marker => (
           <MapView.Marker
