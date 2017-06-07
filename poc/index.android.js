@@ -16,7 +16,7 @@ export default class poc extends Component {
   }
 
   state = {
-    selectedMenu: 'users'
+    selectedMenu: 'map'
   };
 
   showMenu = () => {
@@ -28,20 +28,20 @@ export default class poc extends Component {
       return (
         <View style={{flex: 1, backgroundColor: '#fff'}}>
           <Text 
-            style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'users' ? 'red' : 'gray'}}
-            onPress={() => {
-              this.setState({selectedMenu: 'users'});
-              this.menu.closeDrawer();
-            }}>
-            Usuarios
-          </Text>
-          <Text 
             style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'map' ? 'red' : 'gray'}}
             onPress={() => {
               this.setState({selectedMenu: 'map'});
               this.menu.closeDrawer();
             }}>
             Mapa
+          </Text>
+          <Text 
+            style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'users' ? 'red' : 'gray'}}
+            onPress={() => {
+              this.setState({selectedMenu: 'users'});
+              this.menu.closeDrawer();
+            }}>
+            Usuarios
           </Text>
         </View>
       );

@@ -1,37 +1,39 @@
 import React, {Component} from 'react';
 import {Platform, View, Button, StyleSheet} from 'react-native';
 import MapView from 'react-native-maps';
+import firebaseApp from '../firebase'
 
 export default class Map extends Component {
 
-  state = {
-    markers: [
-      {
-        key: 1,
-        latlng:{latitude: -33.4489,longitude: -70.6693},
-        title: 'Santiago',
-        description: 'Donde Arkhotech'
-      },
-      {
-        key: 2,
-        latlng:{latitude: -33.3990,longitude: -70.5573},
-        title: 'Las Condes',
-        description: 'Donde Guillaume'
-      },
-      {
-        key: 3,
-        latlng:{latitude: -33.5209,longitude: -70.7631},
-        title: 'Maipú',
-        description: 'Donde Javier'
-      },
-      {
-        key: 4,
-        latlng:{latitude: -33.4719,longitude: -70.5628},
-        title: 'Peñalolén',
-        description: 'Donde Raúl'
-      },
-      ]
-  };
+  constructor(props) {
+    super(props);
+    this.markersRef = firebaseApp.database().ref('markers');
+    this.state = {
+      markers: []
+    };
+  }
+
+  listenForMarkers(markersRef) {
+    markersRef.on('value', (snap) => {
+      var markers = [];
+      snap.forEach((child) => {
+        markers.push({
+          key: child.key,
+          title: child.val().title,
+          description: child.val().description,
+          latlng: {
+            latitude: child.child('coords').val().latitude,
+            longitude: child.child('coords').val().longitude
+          }
+        });
+      });
+      this.setState({markers: markers});
+    });
+  }
+
+  componentDidMount() {
+    this.listenForMarkers(this.markersRef);
+  }
 
   render() {
     return (
