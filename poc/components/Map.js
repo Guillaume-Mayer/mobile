@@ -36,17 +36,17 @@ export default class Map extends Component {
   }
 
   addMarker(markersRef) {
-    console.log(typeof markersRef);
-    var newMarkerRef = this.markersRef.push();
-    newMarkerRef.set({
-      title: 'test',
-      description: 'This is a test',
-      coords: {
-        latitude: -33.3905,
-        longitude: -70.5724
-      }
-    });
-    Alert.alert('Marker', 'Your marker has been added');
+    for (var i = 0; i < 10; i++) {
+      var newMarkerRef = this.markersRef.push();
+      newMarkerRef.set({
+        title: 'test' + i,
+        description: 'This is test ' + i,
+        coords: {
+          latitude: -33.4489 + (Math.random()*0.2) - 0.1,
+          longitude: -70.6693 + (Math.random()*0.2) - 0.1
+        }
+      });
+    }
   }
 
   render() {
@@ -77,7 +77,7 @@ export default class Map extends Component {
           onPress={this.props.onButtonPress}/> : null
         }
         <Button
-          title='Add Marker'
+          title='Add 10 Markers'
           color='red'
           onPress={() => this.addMarker(this.markersRef)}/>
       </View>     
