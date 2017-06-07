@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, View, Button, StyleSheet} from 'react-native';
+import {Platform, View, Button, StyleSheet, Alert} from 'react-native';
 import MapView from 'react-native-maps';
 import firebaseApp from '../firebase'
 
@@ -35,6 +35,20 @@ export default class Map extends Component {
     this.listenForMarkers(this.markersRef);
   }
 
+  addMarker(markersRef) {
+    console.log(typeof markersRef);
+    var newMarkerRef = this.markersRef.push();
+    newMarkerRef.set({
+      title: 'test',
+      description: 'This is a test',
+      coords: {
+        latitude: -33.3905,
+        longitude: -70.5724
+      }
+    });
+    Alert.alert('Marker', 'Your marker has been added');
+  }
+
   render() {
     return (
       <View style={styles.container}> 
@@ -62,6 +76,10 @@ export default class Map extends Component {
           color='green'
           onPress={this.props.onButtonPress}/> : null
         }
+        <Button
+          title='Add Marker'
+          color='red'
+          onPress={() => this.addMarker(this.markersRef)}/>
       </View>     
     );
   }
@@ -71,7 +89,7 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
