@@ -45,7 +45,9 @@ export default class Map extends Component {
         /*this.setState({
           region: {
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1
           },
           markers: this.state.markers
         });*/
