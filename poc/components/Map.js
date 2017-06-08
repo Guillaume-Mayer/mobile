@@ -102,9 +102,9 @@ export default class Map extends Component {
           onRegionChange={region => this.setState({region: region, markers: this.state.markers})}
           onRegionChangeComplete={this.onRegionChangeComplete}
           onPress={e => this.addMarker(this.markersRef, 'test', 'tap test', e.nativeEvent.coordinate.latitude, e.nativeEvent.coordinate.longitude)}
-          showsUserLocation={true}
-          showsTraffic={true}
-          showsMyLocationButton={true}
+          showsUserLocation={false}
+          showsTraffic={false}
+          showsMyLocationButton={false}
         >
         {this.state.markers.map(marker => (
           <MapView.Marker
