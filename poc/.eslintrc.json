@@ -25,6 +25,7 @@
         "./components"
     ],
     "plugins": [
-        "react"
+        "react",
+        "react-native"
     ]
 }
