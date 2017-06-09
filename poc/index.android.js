@@ -8,6 +8,7 @@ import {
 
 import UserList from './components/UserList';
 import Map from './components/Map';
+import ArkhoView from './components/ArkhoView';
 
 export default class poc extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class poc extends Component {
               this.setState({selectedMenu: 'map'});
               this.menu.closeDrawer();
             }}>
-            Mapa
+            Parkings
           </Text>
           <Text 
             style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'users' ? 'red' : 'gray'}}
@@ -42,6 +43,14 @@ export default class poc extends Component {
               this.menu.closeDrawer();
             }}>
             Usuarios
+          </Text>
+          <Text 
+            style={{margin: 10, fontSize: 15, textAlign: 'left', color: this.state.selectedMenu === 'arkho' ? 'red' : 'gray'}}
+            onPress={() => {
+              this.setState({selectedMenu: 'arkho'});
+              this.menu.closeDrawer();
+            }}>
+            Arkho
           </Text>
         </View>
       );
@@ -52,7 +61,7 @@ export default class poc extends Component {
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() => navigationView()}>
-        {this.state.selectedMenu === 'users' ? <UserList/> : <Map onButtonPress={this.showMenu}/>}
+        {this.state.selectedMenu === 'map' ? <Map onButtonPress={this.showMenu}/> : (this.state.selectedMenu === 'users' ? <UserList/> : <ArkhoView/>)}
       </DrawerLayoutAndroid>
     );
   }
