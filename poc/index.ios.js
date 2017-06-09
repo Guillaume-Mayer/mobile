@@ -7,6 +7,7 @@ import {
 
 import UserList from './components/UserList';
 import Map from './components/Map';
+import ChessView from './components/ChessView';
 
 export default class poc extends Component {
   state = {
@@ -32,6 +33,14 @@ export default class poc extends Component {
               this.setState({selectedTab: 'users'});
             }}>
             <UserList/>
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            title='Chess'
+            selected={this.state.selectedTab === 'chess'}
+            onPress={()=>{
+              this.setState({selectedTab: 'chess'});
+            }}>
+            <ChessView/>
           </TabBarIOS.Item>
         </TabBarIOS>
      </View>
